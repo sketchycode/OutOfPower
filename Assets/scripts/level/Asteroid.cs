@@ -6,11 +6,11 @@ public class Asteroid : MonoBehaviour
 {
     public event EventHandler Destroyed;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player")
         {
-            var shields = collision.gameObject.GetComponent<Shields>();
+            var shields = collider.gameObject.GetComponent<Shields>();
             if(shields.IsActivated)
             {
                 if(Destroyed != null)

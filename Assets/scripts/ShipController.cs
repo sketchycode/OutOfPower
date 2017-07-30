@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -13,6 +13,17 @@ public class ShipController : MonoBehaviour
     public float CurrentPower { get; private set; }
     public bool IsWorking { get; private set; }
     public bool IsExploded { get; private set; }
+
+    public event EventHandler AsteroidCollision;
+    public event EventHandler CrewDied;
+    public event EventHandler HullBreached;
+    public event EventHandler SpaceStationReached;
+
+    public event EventHandler ThrusterActivationChanged;
+    public event EventHandler HullRepairActivationChanged;
+    public event EventHandler LifeSupportActivationChanged;
+    public event EventHandler ShieldsActivationChanged;
+    public event EventHandler SpaceBrakesActivationChanged;
 
     private ShipComponent[] shipComponenents;
     private Rigidbody2D rb;
@@ -56,7 +67,7 @@ public class ShipController : MonoBehaviour
         crewHealth = Mathf.Clamp01(crewHealth);
         if (crewHealth <= 0)
         {
-            Debug.Log("everyone dead");
+            OnCrewDeath();
         }
     }
 
@@ -68,15 +79,29 @@ public class ShipController : MonoBehaviour
         IsWorking = true;
         shipRenderer.enabled = true;
         IsExploded = false;
+
+        foreach (var c in shipComponenents) { c.Reset(); }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.tag == "asteroid")
         {
-            hullStrength -= Mathf.Clamp(collision.relativeVelocity.magnitude, 0, 10f) / 100f;
+            StartCoroutine(OnAsteroidCollision(collision));
         }
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "spaceStation")
+        {
+            OnSpaceStationReached();
+        }
+    }
+
+    private IEnumerator OnAsteroidCollision(Collision2D collision)
+    {
+        hullStrength -= Mathf.Clamp(collision.relativeVelocity.magnitude, 0, 10f) / 100f;
         if (hullStrength <= 0 && shipRenderer.enabled)
         {
             shipRenderer.enabled = false;
@@ -84,6 +109,31 @@ public class ShipController : MonoBehaviour
             IsExploded = true;
             rb.velocity = Vector2.zero;
             shipExplosion.Play();
+
+            yield return new WaitForSeconds(2);
+
+            if (HullBreached != null)
+            {
+                HullBreached(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    private void OnSpaceStationReached()
+    {
+        IsExploded = true; // hack to make ship stop everything
+        if (SpaceStationReached != null)
+        {
+            SpaceStationReached(this, EventArgs.Empty);
+        }
+    }
+
+    private void OnCrewDeath()
+    {
+        IsExploded = true;
+        if (CrewDied != null)
+        {
+            CrewDied(this, EventArgs.Empty);
         }
     }
 }

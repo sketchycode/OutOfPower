@@ -23,4 +23,10 @@ public class LifeSupport : ShipComponent
 
         return (IsActivated ? activePowerUsage : 0f) * elapsedTime;
     }
+
+    public override void Reset()
+    {
+        base.Reset();
+        IsActivated = true;
+    }
 }

@@ -7,4 +7,9 @@ public abstract class ShipComponent : MonoBehaviour
     public abstract float ProcessForFrame(ShipController ship, float elapsedTime);
 
     public bool IsActivated { get; protected set; }
+
+    public virtual void Reset()
+    {
+        IsActivated = false;
+    }
 }
