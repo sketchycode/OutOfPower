@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
 
         ship.CrewDied += Ship_CrewDied;
         ship.HullBreached += Ship_HullBreached;
+
+        ResetLevel();
     }
 
     private void Ship_HullBreached(object sender, System.EventArgs e)

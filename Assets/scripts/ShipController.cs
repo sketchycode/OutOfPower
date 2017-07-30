@@ -35,7 +35,7 @@ public class ShipController : MonoBehaviour
     private AudioSource shipExplosionSound;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         shipComponenents = GetComponentsInChildren<ShipComponent>();
         rb = GetComponent<Rigidbody2D>();
