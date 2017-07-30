@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
+[ExecuteInEditMode]
 public class FollowUV : MonoBehaviour
 {
     public float paralax = 2f;
@@ -9,7 +10,7 @@ public class FollowUV : MonoBehaviour
 
     private void Start()
     {
-        material = GetComponent<MeshRenderer>().material;
+        material = GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     // Update is called once per frame

@@ -22,6 +22,7 @@ public class AsteroidSpawner : MonoBehaviour
             RespawnAsteroid(asteroid.gameObject, ship, true);
             asteroid.Destroyed += Asteroid_Destroyed;
             asteroid.transform.SetParent(transform, true);
+            asteroid.GetComponent<SpriteRenderer>().sortingOrder = 9;
             spawnedAsteroids[i] = asteroid.gameObject;
         }
     }
