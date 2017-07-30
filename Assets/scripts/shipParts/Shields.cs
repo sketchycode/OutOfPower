@@ -8,6 +8,9 @@ public class Shields : ShipComponent
     public SpriteRenderer shieldsSprite;
     public float activePowerUsage = 0.5f;
 
+    public AudioSource shieldsActivatingSound;
+    public AudioSource shieldsDeactivatingSound;
+
     private void Start()
     {
         IsActivated = false;
@@ -21,5 +24,11 @@ public class Shields : ShipComponent
         shieldsSprite.enabled = IsActivated;
 
         return (IsActivated ? activePowerUsage : 0f) * elapsedTime;
+    }
+
+    protected override void OnIsActivatedChanged(bool newValue)
+    {
+        if (IsActivated) { shieldsActivatingSound.Play(); }
+        else { shieldsDeactivatingSound.Play(); }
     }
 }

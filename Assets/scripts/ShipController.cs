@@ -25,12 +25,14 @@ public class ShipController : MonoBehaviour
     public event EventHandler LifeSupportActivationChanged;
     public event EventHandler ShieldsActivationChanged;
     public event EventHandler SpaceBrakesActivationChanged;
+    public AudioSource asteroidHit;
 
     private ShipComponent[] shipComponenents;
     private Rigidbody2D rb;
     private SpriteRenderer shipRenderer;
     private SpriteRenderer compassRenderer;
     private ParticleSystem shipExplosion;
+    private AudioSource shipExplosionSound;
 
     // Use this for initialization
     void Start()
@@ -41,6 +43,7 @@ public class ShipController : MonoBehaviour
         shipExplosion = GetComponentsInChildren<ParticleSystem>().First(c => c.name == "ship_explosion");
         compassRenderer = GetComponentsInChildren<SpriteRenderer>().First(sr => sr.name == "compass");
 
+        shipExplosionSound = GetComponent<AudioSource>();
         Reset();
     }
 
@@ -117,12 +120,14 @@ public class ShipController : MonoBehaviour
     private IEnumerator OnAsteroidCollision(Collision2D collision)
     {
         hullStrength -= Mathf.Clamp(collision.relativeVelocity.magnitude, 0, 10f) / 100f;
+        asteroidHit.Play();
         if (hullStrength <= 0 && shipRenderer.enabled)
         {
             shipRenderer.enabled = false;
             IsWorking = false;
             IsExploded = true;
             rb.velocity = Vector2.zero;
+            shipExplosionSound.Play();
             shipExplosion.Play();
 
             yield return new WaitForSeconds(2);

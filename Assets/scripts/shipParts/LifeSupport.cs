@@ -9,6 +9,9 @@ public class LifeSupport : ShipComponent
     public float crewHealthDecay = 0.1f;
     public float crewHealthRecoverRate = 0.02f;
 
+    public AudioSource lifeSupportActivatingSound;
+    public AudioSource lifeSupportDeactivatingSound;
+
     private void Start()
     {
         IsActivated = true;
@@ -28,5 +31,11 @@ public class LifeSupport : ShipComponent
     {
         base.Reset();
         IsActivated = true;
+    }
+
+    protected override void OnIsActivatedChanged(bool newValue)
+    {
+        if(IsActivated) { lifeSupportActivatingSound.Play(); }
+        else { lifeSupportDeactivatingSound.Play(); }
     }
 }

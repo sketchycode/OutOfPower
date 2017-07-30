@@ -8,6 +8,8 @@ public class Thruster : ShipComponent
     public float activePowerUsage = 0.5f;
     public float power = 4f;
 
+    public AudioSource activatingSound;
+
     public override float ProcessForFrame(ShipController ship, float elapsedTime)
     {
         var shipBody = ship.GetComponent<Rigidbody2D>();
@@ -22,5 +24,11 @@ public class Thruster : ShipComponent
         }
 
         return powerUsed;
+    }
+
+    protected override void OnIsActivatedChanged(bool newValue)
+    {
+        if(IsActivated) { activatingSound.Play(); }
+        else { activatingSound.Stop(); }
     }
 }

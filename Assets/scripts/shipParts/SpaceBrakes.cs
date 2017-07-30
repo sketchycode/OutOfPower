@@ -8,6 +8,9 @@ public class SpaceBrakes : ShipComponent
     public float dampeningFactor = 0.1f;
     public float activePowerUsage = 0.1f;
 
+    public AudioSource activatingSound;
+    public AudioSource deactivatingSound;
+
     private Rigidbody2D shipBody;
 
     // Use this for initialization
@@ -29,5 +32,11 @@ public class SpaceBrakes : ShipComponent
         }
 
         return (IsActivated ? activePowerUsage : 0f) * elapsedTime;
+    }
+
+    protected override void OnIsActivatedChanged(bool newValue)
+    {
+        if (IsActivated) { activatingSound.Play(); }
+        else { deactivatingSound.Play(); }
     }
 }

@@ -8,6 +8,14 @@ public class Asteroid : MonoBehaviour
 
     public ParticleSystem explosionEffect;
 
+
+    private AudioSource[] explosionSounds;
+
+    private void Start()
+    {
+        explosionSounds = GetComponentsInChildren<AudioSource>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         HandleTriggerEntered(collider);
@@ -27,6 +35,7 @@ public class Asteroid : MonoBehaviour
             {
                 var effect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 effect.Play();
+                explosionSounds[UnityEngine.Random.Range(0, explosionSounds.Length)].Play();
                 if (Destroyed != null)
                 {
                     Destroyed(this, EventArgs.Empty);

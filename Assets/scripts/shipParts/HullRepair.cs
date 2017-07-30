@@ -8,6 +8,8 @@ public class HullRepair : ShipComponent
     public float activePowerUsage = 0.4f;
     public float hullRepairRate = 0.05f;
 
+    public AudioSource hullActivating;
+
     public override float ProcessForFrame(ShipController ship, float elapsedTime)
     {
         if (!ship.IsWorking) { IsActivated = false; }
@@ -22,5 +24,17 @@ public class HullRepair : ShipComponent
         }
 
         return powerUsed;
+    }
+
+    protected override void OnIsActivatedChanged(bool newValue)
+    {
+        if(IsActivated)
+        {
+            hullActivating.Play();
+        }
+        else
+        {
+            hullActivating.Stop();
+        }
     }
 }

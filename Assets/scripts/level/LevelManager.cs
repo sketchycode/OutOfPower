@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     public GameObject spaceStation;
     public AsteroidSpawner asteroidSpawner;
 
+    public AudioSource buttonClickSound;
+
     public Image gameOverWinning;
     public Image gameOverCrewDeath;
     public Image gameOverHullBreach;
@@ -38,6 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        buttonClickSound.Play();
         gameOverWinning.gameObject.SetActive(false);
         gameOverCrewDeath.gameObject.SetActive(false);
         gameOverHullBreach.gameObject.SetActive(false);
@@ -52,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public void MenuButtonClicked()
     {
+        buttonClickSound.Play();
         SceneManager.LoadScene(0);
     }
 }
