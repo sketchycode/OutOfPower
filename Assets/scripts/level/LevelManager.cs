@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -47,5 +48,10 @@ public class LevelManager : MonoBehaviour
         spaceStation.transform.position = Vector2.up.Rotate(Random.value * 360f) * 50f;
 
         asteroidSpawner.ResetAsteroids();
+    }
+
+    public void MenuButtonClicked()
+    {
+        SceneManager.LoadScene(0);
     }
 }

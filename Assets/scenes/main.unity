@@ -396,7 +396,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 439756657fa310a4dbc7dcfae0489c94, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -0.17232509, y: 0.052666668}
+        m_Offset: {x: -0.17564319, y: 0.052666668}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -1194,7 +1194,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 424956540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1860853962}
+        m_MethodName: MenuButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &424956540
@@ -2381,7 +2392,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 016f4d3690f70b342a42190e9d8d02af, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -0.018463403, y: 0.0056428574}
+        m_Offset: {x: -0.018818913, y: 0.0056428574}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -3285,7 +3296,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1009544792}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1860853962}
+        m_MethodName: MenuButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1009544792
@@ -5314,7 +5336,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1616388267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.848764, y: 7.9, z: -10}
+  m_LocalPosition: {x: -26.34648, y: 7.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1370666327}
@@ -6197,7 +6219,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1904043484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1860853962}
+        m_MethodName: MenuButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1904043484
@@ -6773,7 +6806,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 823f99093a0594f4dbd8dfe34c6929c8, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -0.025848765, y: 0.007900001}
+        m_Offset: {x: -0.026346479, y: 0.007900001}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
