@@ -14,29 +14,37 @@ public class View : MonoBehaviour
     public SpaceBrakes spaceBrakes;
     public LifeSupport lifeSupport;
     public Shields shields;
+    public HullRepair hullRepair;
 
-    public Color inactiveColor;
+    public Color buttonInactiveColor;
+    public Color shipDisplayInactiveColor;
     public Color activeColor;
 
-    public Slider powerBar;
-    public Text powerBarText;
+    public ProgressBar powerBar;
+    public ProgressBar hullStrength;
+    public ProgressBar crewHealth;
     public Image lifeSupportIndicator;
     public Image spaceBrakesIndicator;
     public Image backLeftThrusterIndicator;
     public Image backRightThrusterIndicator;
     public Image frontThrusterIndicator;
     public Image shieldsIndicator;
+    public Image shieldsButtonIndicator;
+    public Image hullRepairIndicator;
     
     void Update()
     {
         powerBar.value = ship.CurrentPower / ship.maxPower;
-        powerBarText.text = string.Format("{0:F0}/{1:F0}", ship.CurrentPower, ship.maxPower);
+        hullStrength.value = ship.hullStrength;
+        crewHealth.value = ship.crewHealth;
 
-        lifeSupportIndicator.color = lifeSupport.IsActivated ? activeColor : inactiveColor;
-        spaceBrakesIndicator.color = spaceBrakes.IsActivated ? activeColor : inactiveColor;
-        backLeftThrusterIndicator.color = backLeftThruster.IsActivated ? activeColor : inactiveColor;
-        backRightThrusterIndicator.color = backRightThruster.IsActivated ? activeColor : inactiveColor;
-        frontThrusterIndicator.color = frontThruster.IsActivated ? activeColor : inactiveColor;
-        shieldsIndicator.color = shields.IsActivated ? activeColor : inactiveColor;
+        lifeSupportIndicator.color = lifeSupport.IsActivated ? activeColor : buttonInactiveColor;
+        spaceBrakesIndicator.color = spaceBrakes.IsActivated ? activeColor : buttonInactiveColor;
+        backLeftThrusterIndicator.color = backLeftThruster.IsActivated ? activeColor : shipDisplayInactiveColor;
+        backRightThrusterIndicator.color = backRightThruster.IsActivated ? activeColor : shipDisplayInactiveColor;
+        frontThrusterIndicator.color = frontThruster.IsActivated ? activeColor : shipDisplayInactiveColor;
+        shieldsIndicator.color = shields.IsActivated ? activeColor : shipDisplayInactiveColor;
+        shieldsButtonIndicator.color = shields.IsActivated ? activeColor : buttonInactiveColor;
+        hullRepairIndicator.color = hullRepair.IsActivated ? activeColor : buttonInactiveColor;
     }
 }

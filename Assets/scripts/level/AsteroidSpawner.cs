@@ -41,6 +41,8 @@ public class AsteroidSpawner : MonoBehaviour
             {
                 var offset = (Vector2.up * spawnDistance).Rotate(Random.value * 360f);
                 asteroid.transform.position = ship.position + new Vector3(offset.x, offset.y);
+                asteroid.GetComponent<Rigidbody2D>().angularVelocity = Random.value * 90f - 45f;
+                asteroid.GetComponent<Rigidbody2D>().velocity = Random.insideUnitCircle * 1f;
                 asteroid.SetActive(true);
             }
         }

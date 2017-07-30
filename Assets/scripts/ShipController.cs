@@ -12,6 +12,7 @@ public class ShipController : MonoBehaviour
 
     public float CurrentPower { get; private set; }
     public bool IsWorking { get; private set; }
+    public bool IsExploded { get; private set; }
 
     private ShipComponent[] shipComponenents;
     private Rigidbody2D rb;
@@ -32,6 +33,13 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsExploded)
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
+            return;
+        }
+
         float totalPowerUsage = 0f;
 
         foreach(var sc in shipComponenents)
@@ -59,6 +67,7 @@ public class ShipController : MonoBehaviour
         hullStrength = 1f;
         IsWorking = true;
         shipRenderer.enabled = true;
+        IsExploded = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -72,6 +81,8 @@ public class ShipController : MonoBehaviour
         {
             shipRenderer.enabled = false;
             IsWorking = false;
+            IsExploded = true;
+            rb.velocity = Vector2.zero;
             shipExplosion.Play();
         }
     }
