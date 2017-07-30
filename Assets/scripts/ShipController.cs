@@ -9,6 +9,7 @@ public class ShipController : MonoBehaviour
     public float maxPower = 100f;
     public float crewHealth = 1f;
     public float hullStrength = 1f;
+    public Transform spaceStation;
 
     public float CurrentPower { get; private set; }
     public bool IsWorking { get; private set; }
@@ -28,6 +29,7 @@ public class ShipController : MonoBehaviour
     private ShipComponent[] shipComponenents;
     private Rigidbody2D rb;
     private SpriteRenderer shipRenderer;
+    private SpriteRenderer compassRenderer;
     private ParticleSystem shipExplosion;
 
     // Use this for initialization
@@ -37,6 +39,7 @@ public class ShipController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         shipRenderer = GetComponent<SpriteRenderer>();
         shipExplosion = GetComponentsInChildren<ParticleSystem>().First(c => c.name == "ship_explosion");
+        compassRenderer = GetComponentsInChildren<SpriteRenderer>().First(sr => sr.name == "compass");
 
         Reset();
     }
@@ -48,6 +51,7 @@ public class ShipController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0;
+            compassRenderer.enabled = false;
             return;
         }
 
@@ -69,6 +73,16 @@ public class ShipController : MonoBehaviour
         {
             OnCrewDeath();
         }
+
+        UpdateCompass();
+    }
+
+    private void UpdateCompass()
+    {
+        var dirVec = spaceStation.transform.position - transform.position;
+        var angle = Mathf.Atan2(dirVec.y, dirVec.x) * 180f / Mathf.PI;
+        compassRenderer.transform.position = transform.position + dirVec.normalized * 3f;
+        compassRenderer.transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
     }
 
     public void Reset()
@@ -79,6 +93,7 @@ public class ShipController : MonoBehaviour
         IsWorking = true;
         shipRenderer.enabled = true;
         IsExploded = false;
+        compassRenderer.enabled = true;
 
         foreach (var c in shipComponenents) { c.Reset(); }
     }
