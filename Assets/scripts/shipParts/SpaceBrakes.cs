@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,27 +9,25 @@ public class SpaceBrakes : ShipComponent
     public float activePowerUsage = 0.1f;
 
     private Rigidbody2D shipBody;
-    private bool isComponentActive = false;
 
     // Use this for initialization
     void Start()
     {
         shipBody = GameObject.Find("ship").GetComponent<Rigidbody2D>();
+        IsActivated = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override float ProcessForFrame(ShipController ship, float elapsedTime)
     {
-        if(Input.GetKeyDown(controlKey))
-        {
-            isComponentActive = !isComponentActive;
-        }
+        if (!ship.IsWorking) { IsActivated = false; }
+        else if (Input.GetKeyDown(controlKey)) { IsActivated = !IsActivated; }
 
-        powerUsage = isComponentActive ? activePowerUsage : 0f;
-        if(isComponentActive)
+        if (IsActivated)
         {
             shipBody.velocity = (1f - (dampeningFactor * Time.deltaTime)) * shipBody.velocity;
             shipBody.angularVelocity = (1f - (dampeningFactor * Time.deltaTime)) * shipBody.angularVelocity;
         }
+
+        return (IsActivated ? activePowerUsage : 0f) * elapsedTime;
     }
 }

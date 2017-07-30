@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,20 +8,19 @@ public class Thruster : ShipComponent
     public float activePowerUsage = 0.5f;
     public float power = 4f;
 
-    private Rigidbody2D shipBody;
-
-    private void Start()
+    public override float ProcessForFrame(ShipController ship, float elapsedTime)
     {
-        shipBody = GameObject.Find("ship").GetComponent<Rigidbody2D>();
-    }
+        var shipBody = ship.GetComponent<Rigidbody2D>();
 
-    private void Update()
-    {
-        powerUsage = 0;
-        if(Input.GetKey(controlKey))
+        var powerUsed = 0f;
+        IsActivated = false;
+        if (Input.GetKey(controlKey) && ship.IsWorking)
         {
-            powerUsage = activePowerUsage;
             shipBody.AddForceAtPosition(transform.rotation * (power * Vector2.up), transform.position);
+            powerUsed = activePowerUsage * elapsedTime;
+            IsActivated = true;
         }
+
+        return powerUsed;
     }
 }

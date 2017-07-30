@@ -11,7 +11,7 @@ public class Asteroid : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             var shields = collision.gameObject.GetComponent<Shields>();
-            if(shields.powerUsage > 0)
+            if(shields.IsActivated)
             {
                 if(Destroyed != null)
                 {

@@ -32,11 +32,11 @@ public class View : MonoBehaviour
         powerBar.value = ship.CurrentPower / ship.maxPower;
         powerBarText.text = string.Format("{0:F0}/{1:F0}", ship.CurrentPower, ship.maxPower);
 
-        lifeSupportIndicator.color = lifeSupport.powerUsage > 0 ? activeColor : inactiveColor;
-        spaceBrakesIndicator.color = spaceBrakes.powerUsage > 0 ? activeColor : inactiveColor;
-        backLeftThrusterIndicator.color = backLeftThruster.powerUsage > 0 ? activeColor : inactiveColor;
-        backRightThrusterIndicator.color = backRightThruster.powerUsage > 0 ? activeColor : inactiveColor;
-        frontThrusterIndicator.color = frontThruster.powerUsage > 0 ? activeColor : inactiveColor;
-        shieldsIndicator.color = shields.powerUsage > 0 ? activeColor : inactiveColor;
+        lifeSupportIndicator.color = lifeSupport.IsActivated ? activeColor : inactiveColor;
+        spaceBrakesIndicator.color = spaceBrakes.IsActivated ? activeColor : inactiveColor;
+        backLeftThrusterIndicator.color = backLeftThruster.IsActivated ? activeColor : inactiveColor;
+        backRightThrusterIndicator.color = backRightThruster.IsActivated ? activeColor : inactiveColor;
+        frontThrusterIndicator.color = frontThruster.IsActivated ? activeColor : inactiveColor;
+        shieldsIndicator.color = shields.IsActivated ? activeColor : inactiveColor;
     }
 }

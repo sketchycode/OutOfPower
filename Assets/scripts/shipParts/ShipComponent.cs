@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public class ShipComponent : MonoBehaviour
+public abstract class ShipComponent : MonoBehaviour
 {
     public KeyCode controlKey = KeyCode.Space;
-    public float powerUsage = 0f;
+
+    public abstract float ProcessForFrame(ShipController ship, float elapsedTime);
+
+    public bool IsActivated { get; protected set; }
 }

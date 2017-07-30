@@ -1,21 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Shields : ShipComponent
 {
     public SpriteRenderer shieldsSprite;
-    private bool isComponentActive = false;
     public float activePowerUsage = 0.5f;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(controlKey))
-        {
-            isComponentActive = !isComponentActive;
-        }
-        powerUsage = isComponentActive ? activePowerUsage : 0f;
-        shieldsSprite.enabled = isComponentActive;
+        IsActivated = false;
+    }
+
+    public override float ProcessForFrame(ShipController ship, float elapsedTime)
+    {
+        if (!ship.IsWorking) { IsActivated = false; }
+        else if (Input.GetKeyDown(controlKey)) { IsActivated = !IsActivated; }
+
+        shieldsSprite.enabled = IsActivated;
+
+        return (IsActivated ? activePowerUsage : 0f) * elapsedTime;
     }
 }
